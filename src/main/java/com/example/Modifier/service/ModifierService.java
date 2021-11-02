@@ -11,18 +11,17 @@ import javax.persistence.EntityNotFoundException;
 @Service
 public class ModifierService {
 
-    private ModifierRepository modifierRepository;
+    private final ModifierRepository modifierRepository;
 
     public ModifierService(ModifierRepository modifierRepository) {
         this.modifierRepository = modifierRepository;
     }
 
     public IncreaseResponseDTO increaseCurrent(IncreaseRequestDTO increaseRequestObject) {
-        int value = increaseRequestObject.getAdd();
-        if (value == 0) {
+        if (increaseRequestObject.getAdd() == 0) {
             throw new ModifyOperationError("No modifies expected");
         }
-        int current = modifierRepository.increaseCurrent(increaseRequestObject.getId(), value).orElseThrow(() -> new EntityNotFoundException("Value not found"));
+        int current = modifierRepository.increaseCurrent(increaseRequestObject.getId(), increaseRequestObject.getAdd()).orElseThrow(() -> new EntityNotFoundException("Value not found"));
         return new IncreaseResponseDTO(current);
     }
 }

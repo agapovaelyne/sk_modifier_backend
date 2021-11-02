@@ -16,7 +16,6 @@ public class ModifierRepository {
 
     @Transactional
     public Optional<Integer> increaseCurrent(int id, int add) {
-        System.out.println();
         try {
             SkObject entity = skRepository.findById(id).get();
             entity.increaseCurrent(add);
