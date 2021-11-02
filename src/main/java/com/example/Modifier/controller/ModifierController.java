@@ -35,7 +35,7 @@ public class ModifierController {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    ResponseEntity<String> handleRunTimeExc(MethodArgumentNotValidException exc) {
+    ResponseEntity<String> handleValidationExc(MethodArgumentNotValidException exc) {
         return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).contentType(MediaType.APPLICATION_JSON).body(exc.getLocalizedMessage());
     }
 
